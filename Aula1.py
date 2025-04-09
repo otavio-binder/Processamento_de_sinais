@@ -6,6 +6,7 @@ Eficaz vs Eficiente
 Eficaz: que faz o objetivo, que consegue concluir objetivo com qualidade.
 Eficente: Eficiencia está realcionado ao custo-benefício.
 
+x[n] = xc(n*Ts)
 """
 
 #Sinais em domínio contínuo ou discreto
