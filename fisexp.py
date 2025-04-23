@@ -26,6 +26,8 @@ medidas_espessura_paquimetro = [1.24, 1.28, 1.27, 1.28, 1.25]
 medidas_furo = [2.0 , 2.0, 2.0, 2.0, 2.1]
 
 volume = [330 -315, 330-315, 330-315, 330-315, 325-315]
+massa = [108, 108, 108, 108, 108]
+
 # Cálculo para régua
 mediac, desvio_padraoc = calcular_media_desvio_padrao(medidas_comprimento_regua)
 mediaa, desvio_padraoa = calcular_media_desvio_padrao(medidas_altura_regua)
@@ -40,35 +42,48 @@ mediaep, desvio_padraoep = calcular_media_desvio_padrao(medidas_espessura_paquim
 mediaf, desvio_padraof = calcular_media_desvio_padrao(medidas_furo)
 
 mediav, desvio_padraov = calcular_media_desvio_padrao(volume)
+mediaM, desvio_padraoM = calcular_media_desvio_padrao(massa)
+# Cálculo da densidade
+
+erro_densidade = (0.5/mediav) - (mediaM*2.5/(mediav)**2)
+
+densidadePfuro = ((mediacp * mediaap * mediaep) - (np.pi* mediaf * mediaep)/2)/mediaM
+volumePeca = (mediacp * mediaap * mediaep) - (np.pi * (mediaf/2)**2 *mediaep)
+print(np.pi)
 #Regua
-print(f"Média comprimento regua: {mediac:.2f}")
-print(f"Desvio padrão comprimento regua: {desvio_padraoc:.2f}")
+print(f"Média comprimento regua: {mediac:.3f}")
+print(f"Desvio padrão comprimento regua: {desvio_padraoc:.3f}")
 print("Erro do comprimento: ", 0.05 + desvio_padraoc)
-print(f"Média altura regua: {mediaa:.2f}")
-print(f"Desvio padrão alutra regua: {desvio_padraoa:.2f}")
+print(f"Média altura regua: {mediaa:.3f}")
+print(f"Desvio padrão alutra regua: {desvio_padraoa:.3f}")
 print("Erro da altura: ", 0.05 + desvio_padraoa)
-print(f"Média espessura regua: {mediae:.2f}")
-print(f"Desvio padrão espessura regua: {desvio_padraoe:.2f}")
+print(f"Média espessura regua: {mediae:.3f}")
+print(f"Desvio padrão espessura regua: {desvio_padraoe:.3f}")
 print(f"Erro da espessura: ", 0.05 + desvio_padraoe ,"\n")
 
 #Paquimetro
-print(f"Média comprimento paquimetro: {mediacp:.2f}")
-print(f"Desvio padrão comprimento paquimetro: {desvio_padraocp:.2f}")
-print("Erro da comprimento: ", 0.05 + desvio_padraocp)
-print(f"Média altura paquimetro: {mediaap:.2f}")
-print(f"Desvio padrão alutra paquimetro: {desvio_padraoap:.2f}")
-print("Erro da altura: ", 0.05 + desvio_padraoap)
-print(f"Média espessura paquimetro: {mediaep:.2f}")
-print(f"Desvio padrão espessura paquimetro: {desvio_padraoep:.2f}")
-print("Erro da espessura: ", 0.05 + desvio_padraoep, "\n")
+print(f"Média comprimento paquimetro: {mediacp:.3f}")
+print(f"Desvio padrão comprimento paquimetro: {desvio_padraocp:.3f}")
+print("Erro da comprimento: ", 0.005 + desvio_padraocp)
+print(f"Média altura paquimetro: {mediaap:.3f}")
+print(f"Desvio padrão alutra paquimetro: {desvio_padraoap:.3f}")
+print("Erro da altura: ", 0.005 + desvio_padraoap)
+print(f"Média espessura paquimetro: {mediaep:.3f}")
+print(f"Desvio padrão espessura paquimetro: {desvio_padraoep:.3f}")
+print("Erro da espessura: ", 0.005 + desvio_padraoep, "\n")
 
 #Furo
-print(f"Média diametro furo: {mediaf:.2f}")
-print(f"Desvio padrão furo: {desvio_padraof:.2f}")
+print(f"Média diametro furo: {mediaf:.3f}")
+print(f"Desvio padrão furo: {desvio_padraof:.3f}")
 
 #volume
-print(f"Média volume: {mediav:.2f}")
-print(f"Desvio padrão volume: {desvio_padraov:.2f}")
+print(f"Média volume: {mediav:.3f}")
+print(f"Desvio padrão volume: {desvio_padraov:.3f}")
+print(f"Media Massa: {mediaM:.3f}")
+print(f"Desvio padrão Massa: {desvio_padraoM:.3f}")
+print(f"Erro da Densidade: {erro_densidade:.3f}")
+print(f"Densidade bruta : {densidadePfuro + erro_densidade:.3f} ou {densidadePfuro - erro_densidade:.3f}")
+print(f"Volume Peca {volumePeca:.3f}")
 # Criar gráficos
 fig, axs = plt.subplots(3, 1, figsize=(10, 15))
 
