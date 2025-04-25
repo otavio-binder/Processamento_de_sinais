@@ -106,3 +106,70 @@ b_lambida: R-> C, para todo lambida pertecente R,
 
 x_c(t) = integral de -inf a inf de xchapeu_c(lambida)* b_lambida(t) * dlambida
 '''
+
+#Representaçoes transformadas
+
+'''
+Vimos o conceito básico de cada um dos 4 cenário possíveis
+
+Ficam 3 perguntas
+
+1) Dado um conjunto de funçoes, como determinar se ele forma base?
+.Dimensionalidade e independencia
+
+2)Dado uma base, como calcular a transformada direta de um sinal, nessa base?
+
+3)Para uma dada aplicaçao, como escolher um bom conjunto de funçoes para compor base?
+.que base auxilia a enfatizar as informaçoes importantes para uma dada aplicaçao
+
+
+Começaremos com as 2 primeiras questoes, com um exemplo em cada um dos cenários
+
+e^(j*2*pi*f*t) = cos(2*pi*f*t) +  jsen(2*pi*f*t)
+
+No contexto das transformadas de Fourier, as funçoes de base sao do tipo e^(j*2*pi*f*t),
+onde f indica qual é a funçao de base e t é o ponto em que calcula a funçao.
+Note que e^(j*2*pi*f*t) = cos(2*pi*f*t) +  jsen(2*pi*f*t), de forma que as funcoes
+de base sao senoides complexas
+
+Os valores de f a serem escolhidos para obter funções de base variam com o cenário (c1, c2, c3, c4) e, em alguns casos,
+mesmo dentro do cenário. Os valores de t em que calculamos as funções também dependem do cenário.
+
+Fourier -> sempre e^(j*2*pi*f*t)
+.o que muda de um tipo para outro é a escolha particular de f e t
+
+Exemplo:
+    C1: Sinal em domínio discreto;
+    Transformada em domínio discreto
+
+x: {0, 1, 2 ,..., N-1} -> C
+b_k: {0, 1, 2, ..., N-1}-> C
+
+Queremos, neste exemplo, funções de base do tipo e^(j*2*pi*f*t)
+
+Neste cenário, os valores de t (em e^(j*2*pi*f*t)) correspondem a variável discreta n,
+que vai de nulo a N-1. Para f, precisamos de N valores, porque f identifica cada função de base,
+e a dimensão dos sinais é N (precisamos de N funções de base).
+
+Para escolhermos o f_s, obervamos o seguinte: uma vez que n é inteiro entre 0 e N-1, e e^(j*2*pi*f*t)
+é periódica em f, com período 1. De fato: 
+
+e^(j*2*pi*f*t)= cos(2*pi(f+1)n) +jsen(2*pi(f+1)n) = cos(2*pi*f*n) + jsen(2*pi*f*n)
+
+Portanto, temos que escolher N frequências no intervalo de tamanho 1 em f. Escolheremos
+frequências uniformemente espaçada em [0,1)
+
+Então as frequencias serão
+
+0, 1/N, 2/N, 3/N, ... até (N-1)/N, ou seja 
+
+k/N, para tod k pertecente {0, 1, ..., N-1}
+
+b_k[n] = e^((j*2*pi*k*n)/N), para todo k pertencente {0, 1, ..., N-1}
+
+Para a transformada fracinária de Fourier
+(FsFT)
+
+b_k[n] = e^((j*2*pi*fr(k)*n)/N)
+
+'''

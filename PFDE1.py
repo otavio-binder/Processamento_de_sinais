@@ -1,49 +1,57 @@
-import numpy as np
 import matplotlib.pyplot as plt
 
-# Dados reais das medições
-trilha1 = [0.251, 0.613, 0.800, 0.900, 1.046, 1.233, 1.414, 1.654, 1.734, 2.039, 2.246, 2.538, 2.710, 2.922, 3.111]
-trilha2 = [0.423, 0.799, 1.035, 1.413, 2.256, 3.142, 3.710]
+# Etapa 1: Definindo as distâncias (em cm × 10)
+distancia = [0.1, 0.2 , 0.3 , 0.4 , 0.5]
 
-# Eixos X
-x1 = np.arange(1, len(trilha1) + 1)
-x2 = np.arange(1, len(trilha2) + 1)
+# Etapa 2: Definindo os tempos medidos para cada distância
+# (substitua pelos seus dados reais)
+medidat1 = [0.118, 0.118, 0.116, 0.116, 0.116]
+medidat2 = [0.248, 0.253, 0.251, 0.252]
+medidat3 = [0.349, 0.391, 0.373, 0.388, 0.386]
+medidat4 = [0.513, 0.539, 0.541, 0.528, 0.536]
+medidat5 = [0.656, 0.676, 0.658, 0.683, 0.690]
 
-# Referência linear ideal (de 0 a 5 V) com o mesmo número de pontos
-trilha1_ideal = np.linspace(0, 5, len(trilha1))
-trilha2_ideal = np.linspace(0, 5, len(trilha2))
+# Etapa 3: Calculando as médias para cada tempo
+medit1 = sum(medidat1) / len(medidat1)
+medit2 = sum(medidat2) / len(medidat2)
+medit3 = sum(medidat3) / len(medidat3)
+medit4 = sum(medidat4) / len(medidat4)
+medit5 = sum(medidat5) / len(medidat5)
 
-# Cálculo do EQM para cada trilha
-eqm1 = np.mean((np.array(trilha1) - trilha1_ideal) ** 2)
-eqm2 = np.mean((np.array(trilha2) - trilha2_ideal) ** 2)
+# Calculando as velocidades médias
+v1 = distancia[0] / medit1
+v2 = distancia[1] / medit2
+v3 = distancia[2] / medit3
+v4 = distancia[3] / medit4
+v5 = distancia[4] / medit5
 
-# Criação dos gráficos
-fig, axs = plt.subplots(2, 1, figsize=(13, 10))
+# Listas com resultados
+medias = [medit1, medit2, medit3, medit4, medit5]
+velocidades = [v1, v2, v3, v4, v5]
 
-# Trilha 1
-axs[0].plot(x1, trilha1, marker='o', linestyle='-', label='Trilha 1 (medida)')
-axs[0].plot(x1, trilha1_ideal, linestyle='--', color='gray', label='Trilha 1 (ideal)')
-axs[0].set_xlabel("Pontos Medidos")
-axs[0].set_ylabel("Tensão (V)")
-axs[0].set_title(f"Medição de Tensão na Trilha 1 (EQM = {eqm1:.4f} V²)")
-axs[0].set_ylim(0, 5)
-axs[0].legend()
-axs[0].grid(True)
+# Mostrando no console
+print(f"Médias dos tempos: {medias}")
+print(f"Velocidades médias: {velocidades}")
 
-# Trilha 2
-axs[1].plot(x2, trilha2, marker='s', linestyle='-', label='Trilha 2 (medida)', color='orange')
-axs[1].plot(x2, trilha2_ideal, linestyle='--', color='gray', label='Trilha 2 (ideal)')
-axs[1].set_xlabel("Pontos Medidos")
-axs[1].set_ylabel("Tensão (V)")
-axs[1].set_title(f"Medição de Tensão na Trilha 2 (EQM = {eqm2:.4f} V²)")
-axs[1].set_ylim(0, 5)
-axs[1].legend()
-axs[1].grid(True)
+# Etapa 4: Gráfico do tempo médio x distância
+plt.figure(figsize=(10, 5))
 
-# Ajustar layout e exibir
+plt.subplot(1, 2, 1)  # 1 linha, 2 colunas, 1ª posição
+plt.plot(distancia, medias, marker='o', linestyle='-', color='blue', label='Tempo médio')
+plt.title('Tempo médio x Distância')
+plt.xlabel('Distância m  ')
+plt.ylabel('Tempo médio (s)')
+plt.grid(True)
+plt.legend()
+
+# Etapa 5: Gráfico da velocidade média x distância (no mesmo gráfico)
+plt.subplot(1, 2, 2)  # 1 linha, 2 colunas, 2ª posição
+plt.plot(distancia, velocidades, marker='s', linestyle='--', color='green', label='Velocidade média')
+plt.title('Velocidade média x Distância')
+plt.xlabel('Distância m ')
+plt.ylabel('Velocidade média m/s')
+plt.grid(True)
+plt.legend()
+
 plt.tight_layout()
 plt.show()
-
-# Exibir valores de EQM no console
-print(f"Erro Quadrático Médio (Trilha 1): {eqm1:.4f} V²")
-print(f"Erro Quadrático Médio (Trilha 2): {eqm2:.4f} V²")
